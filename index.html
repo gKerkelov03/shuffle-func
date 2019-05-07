@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Tests</title>   
+</head>
+<body>       
+    <script>
+		let matrix = [
+			[1, 2, 3],
+			[4, 5, 6],
+			[7, 8, 0],
+		];
+		
+		function shuffle(matrix, count){
+			let row = matrix.length - 1,
+				col = matrix.length - 1;
+				
+			function isValid(val){
+				return val >= 0 && val < matrix.length;
+			}
+			
+			function random(min, max) {
+				return Math.floor(Math.random() * (min < 0 ? max + min : max - min) + min);
+			}
+			
+			for(let i = 0; i < count; i++){
+				
+				let r = random(-1, 2),
+					c = random(-1, 2);
+					
+				while(!isValid(row + r) || !isValid(col + c))
+				{
+					r = random(-1, 2);
+					c = random(-1, 2); 
+				}
+				
+				let tmp = matrix[row + r][col + c];
+				matrix[row + r][col + c] = matrix[row][col];
+				matrix[row][col] = tmp;
+				
+				row = row + r;
+				col = col + c;
+				
+				console.log("for")
+			}
+		}
+		
+		shuffle(matrix, 100);
+		console.log(matrix); 	
+	</script>
+</body>
+</html>
